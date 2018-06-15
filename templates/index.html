@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block header %}
+{# Check if there's a latest post #}
+{% if latest %}
+
+<div class="latest-post">
+    <img src="{{ latest.image.url }}" alt="">
+    
+    <div class="recent-banner">
+        <h4>Most Recent Post...</h4>
+    </div>
+    
+    <div class="latest-post-body">
+        
+        <h1>{{ latest.title }}</h1>
+        <a href="{% url 'posts:detail' slug=latest.slug %}" class="btn btn-primary">Read This Post</a>
+    </div>
+</div>
+{% endif %}
+
+{% endblock %}
+
+{% block content %}
+<section class="home-posts">
+    <div class="container">
+        
+        <div class="row">
+            
+            <div class="col-md-4">
+                <div class="site-desc">
+                    <h3 class="text-center">Welcome to the Public Django Blog</h3>
+                    <hr>
+                    
+                    <p class="lead">The Public Django Blog is just as it says, a public blog built entirely within the Django Web Framework.</p>
+                    
+                    <p>Go ahead and sign up, log in and start creating posts or comment on other posts!</p>
+                    
+                    <small>&copy; <a href="https://www.corymeikle.co.uk" target="_blank">Cory Meikle</a> 2018</small>
+                </div>
+            </div>
+            <div class="col-md-8">
+                
+                {% if posts.count > 0 %}
+                <div class="wrapper">
+                    {% for post in posts %}
+                    <div class="card">
+                        <img src="{{ post.image.url }}" class="card-img-top">
+                        
+                        <div class="card-body">
+                            
+                            <h3 class="card-title">
+                                <a href="{% url 'posts:detail' slug=post.slug %}" target="_blank">{{ post.title }}</a>
+                            </h3>
+                            
+                            <p class="card-text">
+                                {{ post.snippet|safe }}
+                            </p>
+                            
+                            <small class="text-muted">Posted by: <strong>{{ post.author }}</strong><br></small>
+                            <small class="text-muted">Posted on: <strong>{{ post.created_at }}</strong></small><br>
+                            
+                            <small class="text-muted"><i class="far fa-comment"></i> {{ post.comments.all.count }} comments</small>
+                        </div>
+                        
+                        
+                        <div class="card-footer bg-transparent">
+                            <a class="btn btn-outline-primary" href="{% url 'posts:detail' slug=post.slug %}">Read More</a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    
+                </div>
+                {% else %}
+                <h2>No posts have been made on this website</h2>
+                {% endif %}
+            </div>
+        </div>
+        
+    </div>
+</section>
+
+{% endblock %}

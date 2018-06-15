@@ -1,0 +1,175 @@
+:root {
+    --txt-color: #04080f;
+    --box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.35);
+}
+
+*{
+    box-sizing: border-box;
+}
+
+/* https://coolors.co/04080f-507dbc-90fcf9-63b4d1-7dbbc3 */
+
+body {
+    overflow-x: hidden;
+    font-family: 'Merriweather' !important;
+}
+
+.navbar {
+    background: #90fcf9;
+}
+
+.navbar .nav-item .nav-link, .navbar-brand {
+    color: var(--txt-color) !important;
+}
+
+.navbar .nav-item .nav-link:hover, .navbar-brand:hover {
+    background: #507dbc;
+    color: #fff !important;
+    text-shadow: 0 0 5px black;
+}
+
+.jumbotron {
+    background: #333 !important;
+    color: #fff;
+    border-radius: 0 !important;
+}
+
+.home-posts {
+    margin: 100px 0;
+}
+
+.home-posts h2 {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.latest-post {
+    position: relative;
+    height: 300px;
+    color: #fff;
+    text-shadow: 0 0 5px rgb(0, 0, 0);
+    background: rgba(0, 0, 0, 0.3);
+    border-bottom: 2px solid #507dbc;
+}
+
+.recent-banner {
+    position: absolute;
+    width: 100%;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.35);
+    top: 0;
+    text-align: center;
+}
+
+.latest-post img {
+    width: 100%;
+    height: 100%;
+    opacity: 0.6;
+}
+
+.latest-post-body {
+    position: absolute;
+    bottom: 3%;
+    text-align: center;
+    width: 100%;
+}
+
+.latest-post-body h1 {
+    font-size: 1.8rem;
+    margin: 15px 0;
+}
+
+.latest-post-body p {
+    font-size: 1rem;
+}
+
+.sidebar {
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    padding: 30px;
+}
+
+.site-desc {
+    margin: 0 20px 10px 0;
+}
+
+.form-element input {
+    width: 100%;
+    border-radius: 12px;
+    border-color: black;
+    margin-bottom: 20px;
+    padding: 5px;
+}
+
+.form-group input:focus, .form-group textarea:focus {
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.35);
+}
+
+.wrapper {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 2em;
+    margin: 0 auto;
+}
+
+.card {
+    box-shadow: var(--box-shadow);
+}
+
+.card-title {
+    font-size: 1.6rem;
+    font-family: 'Oswald';
+    text-align: center;
+}
+
+.card-text {
+    font-size: 0.8rem;
+    text-align: center;
+    margin: 15px 0;
+}
+
+.card:hover {
+    box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.35);
+}
+
+.card-img-top {
+    border-bottom: 2px solid black;
+    opacity: 0.8;
+}
+
+.post-img {
+    width: 100%;
+    margin-bottom: 50px;
+}
+
+.post h1 {
+    font-family: 'Oswald', sans-serif;
+    margin-bottom: 50px;
+}
+
+.post p, .post small {
+    text-align: center;
+    font-family: 'Roboto';
+}
+
+.comment-form textarea{
+    height: 100px;
+}
+
+
+@media(min-width:680px) {
+    .wrapper {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media(min-width:1060px) {
+
+    .latest-post {
+        height: 600px;
+    }
+
+    .wrapper {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}

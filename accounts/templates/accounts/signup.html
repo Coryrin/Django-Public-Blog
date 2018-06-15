@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load bootstrap4 %}
+
+{% block content %}
+<div class="container">
+    <h1>Sign Up</h1>
+
+    <form action="{% url 'accounts:signup' %}" method="POST">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <input class="btn btn-outline-primary" type="submit" value="Sign Up">
+    </form>
+</div>
+{% endblock %}

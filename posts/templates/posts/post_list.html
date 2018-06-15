@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block header %}
+<div class="jumbotron">
+    <div class="container">
+        <h1 class="text-center">All Posts</h1>
+    </div>
+</div>
+
+{% endblock header %}
+
+{% block content %}
+
+<div class="container">
+    
+    <div class="row">
+        
+        <div class="list-wrapper">
+            {% for post in post_list %}
+            <div class="card spacing">
+                
+                <h3 class="card-header text-center">
+                    <a href="{% url 'posts:detail' slug=post.slug %}">{{ post.title }}</a>
+                </h3>
+                <div class="card-body">
+                    <p class="card-text">{{ post.snippet }}</p>
+                    
+                    <div class="card-footer text-muted bottom">
+                        <p>{{ post.created_at }}</p>
+                        <small>{{ post.comments.all.count }} comment(s)</small>
+                    </div>
+                </div>
+            </div>
+            
+            
+            
+            
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

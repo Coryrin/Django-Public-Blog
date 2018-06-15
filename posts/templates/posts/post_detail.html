@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% load bootstrap4 %}
+
+{% block content %}
+<div class="container">
+    
+    <div class="row">
+        <div class="col-md-8">
+            
+            <div class="post">
+
+                <img src="{{ post.image.url }}" class="post-img">
+                
+                <h1 class="text-center">{{ post.title }}</h1>
+                {% comment %} |safe operator to let html, (e.g. bold characters, hrefs) pass through {% endcomment %}
+                <p class="post-detail-text">{{ post.message_html|safe }}</p>
+                
+                <div class="end-content">
+                        {% if user == post.author %}
+
+                        <div class="text-center">
+                            <a href="{% url 'posts:update' slug=post.slug %}" class="btn btn-outline-primary">Update</a>
+                            <a href="{% url 'posts:delete' slug=post.slug %}" class="btn btn-outline-danger">Delete</a><br><br>
+
+                        </div>
+                            
+                        {% endif %}
+                    
+                    <small>
+                        Posted by: <strong>{{ post.author }}</strong>
+                        on: <strong>{{ post.created_at }}</strong>
+                    </small>
+                </div>
+            </div>
+            <hr>
+            <h3>Comments</h3>
+            {% if user.is_authenticated %}
+                <div class="comment-form">
+                    <form action="{% url 'posts:detail' slug=post.slug %}" method="POST">
+                        {% csrf_token %}
+                        {% bootstrap_form form %}
+
+                        <input type="submit" value="Add Comment" class="btn btn-outline-primary">
+                    </form>
+                </div>
+            {% else %}
+                <h3>You must be logged in to create a comment.</h3><br>
+                <a href="{% url 'accounts:login' %}" class="btn btn-outline-primary">Log In</a>
+            {% endif %}
+            <hr>
+            
+            <div class="comments">
+                {% if post.comments.all.count > 0 %}
+                    {% for comment in post.comments.all %}
+                        <p>{{ comment.message|safe }}</p>
+
+                        <small>
+                            Posted by: <strong>{{ comment.author }}</strong> at <strong>{{  comment.created_at }}</strong>
+                        </small><br>
+                        <hr>
+                    {% endfor %}
+                {% else %}
+                    <h4>No comments have been made on this post yet. :(</h4>
+                {% endif %}
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
